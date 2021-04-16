@@ -1,0 +1,69 @@
+.container {    display: flex;    overflow-x: auto;}
+.container img {   width:20%;
+    height:10%; margin-right: 15px;}
+container::-webkit-scrollbar {    display: none;}
+/*.container {   display: flex;   align-items: center;   height: 100vh;}*/
+.secImg{
+    height: 5% !important;
+}
+body{
+    margin-left: 4%;
+    font-size:larger;
+    background-color: #FAF9F6;
+}
+
+.part1{
+    width:50%;
+    vertical-align: top;
+    display:inline-block;
+}
+.part2{
+    width:45%;
+    vertical-align: top;
+    font-size: 1.3em;
+    display:inline-block;
+    margin-left: 4%;
+    border: black solid 2px;
+    box-shadow: 5px 10px #888888;
+    padding-left: 3px;
+}
+
+.container{
+    margin-left: 1%;
+    width:100%;
+    height:20% !important;
+    max-height: 1080px;
+
+    display:flex;
+
+    margin-top:15%;
+}
+.conatiner img{
+    height:20%;
+    max-height: 1080px;
+
+
+}
+/*image hirz*/
+.container {       overflow-x: auto;
+overflow-y:hidden !important;}
+.heading2{
+    text-decoration: underline;
+}
+/*circuit img*/
+.circuitImg img{
+    width:65%;height:15%;
+}
+.esp32{
+    margin-right: 20%;
+}
+.width75{
+    width:75%;
+}
+.code1{
+    height:75vh;
+    width:80vh;
+    background-color: #FDF5EA;
+
+    overflow-y: scroll;
+}
