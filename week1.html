@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            WEEK 1 REPORT 
+        </title>
+        <link rel="stylesheet" href="style21.css">
+        <meta name="viewport" content="width=device-width,intital-scale=1.0,user-scalable=no"/>
+    </head>
+    <body>
+        <h1 class="heading2">Week 1</h1>
+            <div class='part1'>
+                <h2>
+                    Project Description-Altert Device
+                </h2>
+
+                <p>
+                    Alerting devices for a person with sight and hearing difficulties will let them know what is happening in the home eg. a caller at the door, activated smoke alarm or alarm clock, telephone ringing etc.
+                  
+                </p>
+                <h2 class="heading2"><u>
+                  Project  Specifications </u>
+                </h2>
+                <p>
+                   Device that can be used to alert and call students int the library . Devices need to be portable and be able to alert the students using vibration ans lights.
+
+                </p>
+                <h2 class="heading2">
+                    Components Listed
+                </h2>
+                <ul>
+                    <li>
+                        ESP 32
+                    </li>
+                    <li>
+                        transistor 2N2222
+                    </li>
+                    <li>
+                        3.3V regulator 
+                    </li>
+                    <li>
+                    Battery 
+                    </li>
+                    <li>
+                        Motor
+                        </li>
+                        <li>
+                            Charger
+                            </li>
+                </ul>
+            </div>
+        <div class="part2">
+            <h3><u>
+                TASK GIVEN :</u>
+                <ul>
+                    <li>
+                        Come up with the circuit diagram for the device 
+                    </li>
+                    <li>
+                        set up the circuit on PCB
+                    </li>
+                    <li>
+                        Interfacing with ESP32
+                    </li>
+                </ul>
+                 
+            </h3>
+        </div>
+        <!--esp 32 desc -->
+        <div class="esp32">
+            <h3>
+                ESP 32
+            </h3>
+            <p>ESP32 is a series of low-cost, low-power system on a chip microcontrollers with integrated Wi-Fi and dual-mode Bluetooth. The ESP32 series employs a Tensilica Xtensa LX6 microprocessor in both dual-core and single-core variations and includes built-in antenna switches, RF balun, power amplifier, low-noise receive amplifier, filters, and power-management modules. ESP32 is created and developed by Espressif Systems, 
+                a Shanghai-based Chinese company, and is manufactured by TSMC using their 40 nm process.[2] It is a successor to the ESP8266 microcontroller.</p>
+       <p></p>
+            </div>
+            <div>
+                <h3> 1 : Circuit Diagram </h3>
+                <div class="circuitImg">
+                <img src="images/Alertdevice.png">
+                </div>
+                <p class="width75">
+                    The first task was to draw the circuit according to the specifications.The motor is programmed using ESP32.ESP32 is powered by regulated 
+                    voltage of 3.3 V.The transistor used in 2N2222 . The first draft of the circuit had some mistakes .Afterwards the circuit was modified by Amith sir.
+                    The final version of ciruit diagram is as shown above.  
+                </p>
+            </div>
+            <div>
+                <h3> 2. Circuit Design on PCB </h3>
+               
+                <p class="width75">
+                    The next task was to assemble the circuit on  PCB according to the circuit diagram .A battery of 7.4 Voltage ws connected to regulator 
+                     to obtain 3.3 V and 5.1 V .The 5.1 V to diode IN007 ans 3.3 V to the ESP32 .The motor was programmed by ESP 32 and using transistor.
+                     
+
+                </p>
+            </div>
+            <!-- progarming ESP sec -->
+            <div>
+                <h3> 3. Programming ESP32 </h3>
+               
+                <p class="width75">
+                    The third task was to program the ESP32 .The code was written on arduino IDE and uploaded to the microcontroller . 
+                    he DC motor requires a big jump in current to move, so the motors should be powered using an external power source from the ESP32.
+
+                </p>
+            </div>
+            <div class="code1">
+                <pre>
+                    /*********
+  Rui Santos
+  Complete project details at https://randomnerdtutorials.com  
+*********/
+
+// Motor A
+int motor1Pin1 = 27; 
+int motor1Pin2 = 26; 
+int enable1Pin = 14; 
+
+// Setting PWM properties
+const int freq = 30000;
+const int pwmChannel = 0;
+const int resolution = 8;
+int dutyCycle = 200;
+
+void setup() {
+  // sets the pins as outputs:
+  pinMode(motor1Pin1, OUTPUT);
+  pinMode(motor1Pin2, OUTPUT);
+  pinMode(enable1Pin, OUTPUT);
+  
+  // configure LED PWM functionalitites
+  ledcSetup(pwmChannel, freq, resolution);
+  
+  // attach the channel to the GPIO to be controlled
+  ledcAttachPin(enable1Pin, pwmChannel);
+
+  Serial.begin(115200);
+
+  // testing
+  Serial.print("Testing DC Motor...");
+}
+
+void loop() {
+  // Move the DC motor forward at maximum speed
+  Serial.println("Moving Forward");
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, HIGH); 
+  delay(2000);
+
+  // Stop the DC motor
+  Serial.println("Motor stopped");
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, LOW);
+  delay(1000);
+
+  // Move DC motor backwards at maximum speed
+  Serial.println("Moving Backwards");
+  digitalWrite(motor1Pin1, HIGH);
+  digitalWrite(motor1Pin2, LOW); 
+  delay(2000);
+
+  // Stop the DC motor
+  Serial.println("Motor stopped");
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, LOW);
+  delay(1000);
+
+  // Move DC motor forward with increasing speed
+  digitalWrite(motor1Pin1, HIGH);
+  digitalWrite(motor1Pin2, LOW);
+  while (dutyCycle <= 255){
+    ledcWrite(pwmChannel, dutyCycle);   
+    Serial.print("Forward with duty cycle: ");
+    Serial.println(dutyCycle);
+    dutyCycle = dutyCycle + 5;
+    delay(500);
+  }
+  dutyCycle = 200;
+}
+                </pre>
+            </div>
+            <div>
+                <h3> 4. Testing with Blynk application </h3>
+               
+                <p class="width75">
+                   The setup was tested using an interface created on Blynk. The application activates the alert device at a preset time
+                   for a preset duration .
+                </p>
+                <div>
+                    <h3>
+                      404 :  iamge n code need to be uploaded .
+                    </h3>
+                </div>
+            </div>
+
+            <h2><u>
+                Images </u>
+            </h2>
+        <div class="container"> 
+            
+            
+            <img src="images/image1.jpeg"   alt="Bhutan">
+        
+      
+            <img src="images/image2.jpeg" class="secImg"  alt="Bhutan">
+      
+            <img src="images/image4.jpeg"   alt="Bhutan" height="100">
+        
+            <img src="images/image3.jpeg"   alt="Bhutan">
+            <img src="images/image5.jpeg"   alt="Bhutan">
+           
+        </div>
+    </body>
+</html>
