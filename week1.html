@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            WEEK 1 REPORT 
+        </title>
+        <link rel="stylesheet" href="style21.css">
+        <meta name="viewport" content="width=device-width,intital-scale=1.0,user-scalable=no"/>
+    </head>
+    <body>
+        <h1 class="heading2">Week 1</h1>
+            <div class='part1'>
+                <h2>
+                    Project Description-Alert Device
+                </h2>
+
+                <p>
+                    Device that can be used to alert and call students into the library . Devices need to be portable and be able to alert the students using vibration and lights.
+                    The alert device is controlled using mobile application.
+                </p>
+                <h2 class="heading2"><u>
+                  Project  Specifications </u>
+                </h2>
+                <p>
+                   <ul>
+                       <li>
+                           Portable 
+                       </li>
+                       <li>
+                        Economical
+                         
+                    </li>
+                    <li>
+                    Simple UI
+                         
+                    </li>
+                   </ul>
+
+                </p>
+                <h2 class="heading2">
+                    Components Listed
+                </h2>
+                <ul>
+                    <li>
+                        ESP 32
+                    </li>
+                    <li>
+                        transistor 2N2222
+                    </li>
+                    <li>
+                        3.3V regulator 
+                    </li>
+                    <li>
+                    Battery 
+                    </li>
+                    <li>
+                        Motor
+                        </li>
+                        <li>
+                            Charger
+                            </li>
+                </ul>
+            </div>
+        <div class="part2">
+            <h3><u>
+                TASK GIVEN :</u>
+                <ul>
+                    <li>
+                        Come up with the circuit diagram for the device 
+                    </li>
+                    <li>
+                        set up the circuit on PCB
+                    </li>
+                    <li>
+                        Interfacing with ESP32
+                    </li>
+                </ul>
+                 
+            </h3>
+        </div>
+        <!--esp 32 desc -->
+        <div class="esp32">
+            <h3>
+                ESP 32
+            </h3>
+            <p>ESP32 is a series of low-cost, low-power system on a chip microcontrollers with integrated Wi-Fi and dual-mode Bluetooth. The ESP32 series employs a Tensilica Xtensa LX6 microprocessor in both dual-core and single-core variations and includes built-in antenna switches, RF balun, power amplifier, low-noise receive amplifier, filters, and power-management modules. ESP32 is created and developed by Espressif Systems, 
+                a Shanghai-based Chinese company, and is manufactured by TSMC using their 40 nm process. It is a successor to the ESP8266 microcontroller.</p>
+       <p></p>
+            </div>
+            <div>
+                <h3> 1 : Circuit Diagram </h3>
+                <div class="circuitImg">
+                <img src="images/Alertdevice.png">
+                </div>
+                <p class="width75">
+                    The first task was to draw the circuit according to the specifications. The motor is programmed using ESP32. ESP32 is powered by regulated 
+                    voltage of 3.3V. The transistor used in 2N2222 . The first draft of the circuit had some mistakes. Afterwards the circuit was modified by Amith sir.
+                    The final version of ciruit diagram is as shown above.  
+                </p>
+            </div>
+            <div>
+                <h3> 2. Circuit Design on PCB </h3>
+               
+                <p class="width75">
+                    The next task was to assemble the circuit on  PCB according to the circuit diagram . A battery of 7.4 Voltage ws connected to regulator 
+                     to obtain 3.3 V and 5.1 V. The 5.1 V to diode IN007 ans 3.3 V to the ESP32 .The motor was programmed by ESP 32 and using transistor.
+                     The different cricuits were done for an experimentation/study purpose.The esp32 controlllig process was initially tried with an on/off sign ,then with an LED and then with motor control and Blynk app interface
+                     
+
+                </p>
+            </div>
+            <!-- progarming ESP sec -->
+            <div>
+                <h3> 3. Programming ESP32 </h3>
+               
+                <p class="width75">
+                    The third task was to program the ESP32 .The code was written on arduino IDE and uploaded to the microcontroller . 
+                    The DC motor requires a big jump in current to move, so the motor should be powered using an external power source from the ESP32.
+
+                </p>
+            </div>
+            <div class="code1">
+                <pre>
+  
+                    #define BLYNK_PRINT Serial
+                    #include <WiFi.h>
+                    #include <WiFiClient.h>
+                    #include <BlynkSimpleEsp32.h>
+                    int pin = 2;
+                    char auth[] = "pGw0NoqVl6aWtT56tG1LPZdYDMQUAHPS";       // You should get Auth Token in the Blynk App.
+                    char ssid[] = "realme 3 Pro";                    // Your Wi-Fi Credentials
+                    char pass[] = "12345678";
+                    
+                    
+                    void setup() {  
+                      pinMode(pin, OUTPUT);
+                      pinMode(pin, HIGH);
+                      Serial.begin(115200);
+                      delay(10);
+                      Serial.print("Connecting to ");
+                      Serial.println(ssid);
+                      WiFi.begin(ssid, pass);
+                      int wifi_ctr = 0;
+                      while (WiFi.status() != WL_CONNECTED) {
+                      delay(500);
+                      Serial.print(".");
+                      }
+                      Serial.println("WiFi connected");  
+                      Blynk.begin(auth, ssid, pass);
+                    }
+                    void loop(){
+                        Blynk.run();
+                    }
+                </pre>
+            </div>
+            <div>
+                <h3> 4. Testing with Blynk application </h3>
+                <div class="circuitImg" >
+                    <img src="images/blyk_code_img.png">
+                    </div>
+                <p class="width75">
+                   The setup was tested using an interface created on Blynk. The application activates the alert device at a preset time
+                   for a preset duration .Using the arduino IDE the code to enable control over the circuit using ESP32 and the blynk app has been used to control the device using a mobile application.
+                </p>
+                
+            </div>
+
+            <h2><u>
+                Images </u>
+            </h2>
+        <div class="container"> 
+            
+            
+            <img src="images/image1.jpeg"   alt="Bhutan">
+        
+      
+            <img src="images/image2.jpeg" class="secImg"  alt="Bhutan">
+      
+            <img src="images/image4.jpeg"   alt="Bhutan" height="100">
+        
+            <img src="images/image3.jpeg"   alt="Bhutan">
+            <img src="images/image5.jpeg"   alt="Bhutan">
+           
+        </div>
+    </body>
+</html>
